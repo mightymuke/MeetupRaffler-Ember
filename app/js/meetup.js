@@ -1,7 +1,7 @@
 // App.MeetupRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
 // 	model: function() {
-// 		var model = meetup.results[0];
-// 		model.rsvps = meetupRsvps.results.sort(MeetupRaffler.sorter('member.name', false, function(a){return a.toUpperCase()}));
+// 		var model = dataMeetup.results[0];
+// 		model.rsvps = dataMeetupRsvps.results.sort(MeetupRaffler.sorter('member.name', false, function(a){return a.toUpperCase()}));
 // 		return model; 
 // 	}
 // })

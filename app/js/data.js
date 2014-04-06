@@ -1,4 +1,4 @@
-var meetups =
+var dataMeetups =
 {
   "meta": {
     "count": 17,
@@ -1293,7 +1293,7 @@ var meetups =
   ]
 }
 
-var meetup =
+var dataMeetup =
 {
   "meta": {
     "count": 1,
@@ -1357,7 +1357,7 @@ var meetup =
   ]
 }
 
-var meetupRsvps =
+var dataMeetupRsvps =
 {
   "meta": {
     "count": 35,

@@ -78,7 +78,7 @@ Ember.Application.initializer({
 		});
 		//container.register('location:hash-from-url', App.HashLocationFromUrl);
 		Ember.SimpleAuth.setup(container, application, {
-			crossOriginWhitelist: ['https://api.meetup.com', 'http://localhost:8002'],
+			crossOriginWhitelist: ['https://api.meetup.com'],
 			authorizer: App.MeetupAuthorizer
 		});
 	}

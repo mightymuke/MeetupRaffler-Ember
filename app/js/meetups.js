@@ -1,6 +1,6 @@
 // App.MeetupsIndexRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
 // 	model: function() {
-// 		return meetups.results.sort(MeetupRaffler.sorter('name', false, function(a){return a.toUpperCase()}));
+// 		return dataMeetups.results.sort(MeetupRaffler.sorter('name', false, function(a){return a.toUpperCase()}));
 // 	}
 // })
 
