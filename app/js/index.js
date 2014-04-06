@@ -1,3 +1,9 @@
+App.IndexRoute = Ember.Route.extend({
+	model: function() {
+		return { title: "Dashboard" };
+	}
+});
+
 App.IndexController = Ember.ObjectController.extend({
 	isEditing: false,
 
@@ -8,11 +14,5 @@ App.IndexController = Ember.ObjectController.extend({
 		doneEditing: function() {
 			this.set('isEditing', false);
 		}
-	}
-});
-
-App.IndexRoute = Ember.Route.extend({
-	model: function() {
-		return { title: "Dashboard" };
 	}
 });

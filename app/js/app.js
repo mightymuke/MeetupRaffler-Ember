@@ -81,6 +81,7 @@ Ember.Application.initializer({
 			crossOriginWhitelist: ['https://api.meetup.com'],
 			authorizer: App.MeetupAuthorizer
 		});
+		MeetupRaffler.Notifier = new NotificationManager(application);
 	}
 });
 
@@ -125,22 +126,26 @@ App.MeetupAuthenticator = Ember.SimpleAuth.Authenticators.OAuth2.extend({
 	 				// resolve (including the account id) as the AJAX request was successful; all properties this promise resolves
 	 				// with will be available through the session
 	 				resolve(credentials);
+	 				MeetupRaffler.Notifier.notify('information', 'Successfully logged in!');
 	 			});
 		 	} else {
 				reject(credentials.error);
 		 	}
  		});
-	},
-	makeRequest: function() {
-		var memberId = '69467752';
-		//var accessToken = this.session.get('access_token');
-	  // 	return Ember.$.getJSON('https://api.meetup.com/2/groups?member_id=' + memberId + '&access_token=' + accessToken)
-			// .then(function(data) {
-			// 	console.log(data);
-			// });
-		var url = 'https://api.meetup.com/2/groups?member_id=' + memberId;
-		return Ember.$.getJSON(url).then(success); //, failure)
 	}
+	// invalidate: function() {
+	// 	MeetupRaffler.Notifier.notify('information', 'Thanks for visiting. You have been signed out.');
+	// }
+	// makeRequest: function() {
+	// 	var memberId = '69467752';
+	// 	//var accessToken = this.session.get('access_token');
+	//   // 	return Ember.$.getJSON('https://api.meetup.com/2/groups?member_id=' + memberId + '&access_token=' + accessToken)
+	// 		// .then(function(data) {
+	// 		// 	console.log(data);
+	// 		// });
+	// 	var url = 'https://api.meetup.com/2/groups?member_id=' + memberId;
+	// 	return Ember.$.getJSON(url).then(success); //, failure)
+	// }
 });
 
 App.MeetupAuthorizer = Ember.SimpleAuth.Authorizers.OAuth2.extend();
