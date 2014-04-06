@@ -52,7 +52,7 @@ body {
   padding-right: 20px;
   padding-left: 20px;
 }
-.nav-sidebar > .active > a {
+.nav-sidebar > li > a.active {
   color: #fff;
   background-color: #428bca;
 }
@@ -189,4 +189,13 @@ li.member-listing {
 .member-meetup-name h3 {
   margin-top: 8px;
   margin-right: 5px;
+}
+
+.index-edit {
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.index-edit input {
+  margin-top: 10px;
 }

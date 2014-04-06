@@ -1,0 +1,38 @@
+<script type="text/x-handlebars" id="index">
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">{{title}}</h1>
+    <span class="text-muted">Put something nice here</span>
+
+    <div class="index-edit">
+      {{#if isEditing}}
+        <button {{action 'doneEditing'}}>Done</button>
+        {{partial 'index/edit'}}
+      {{else}}
+        <button {{action 'edit'}}>Edit</button>
+      {{/if}}
+    </div>
+    <!--h1 class="page-header">{{title}}</h1>
+    <br/>
+    <br/>
+    <h1 class="page-header">{{title}}</h1>
+    <br/>
+    <br/>
+    <h1 class="page-header">{{title}}</h1>
+    <br/>
+    <br/>
+    <h1 class="page-header">{{title}}</h1>
+    <br/>
+    <br/>
+    <h1 class="page-header">{{title}}</h1>
+    <br/>
+    <br/>
+    <h1 class="page-header">{{title}}</h1-->
+</div>
+
+<!-- Notifications -->
+<!--div noty ng-repeat="n in notifications"/-->
+</script>
+
+<script type="text/x-handlebars" id="index/_edit">
+  <div>{{input type="text" value=title}}</div>
+</script>
