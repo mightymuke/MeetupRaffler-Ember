@@ -15,7 +15,11 @@ App.MeetupsIndexRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMi
 			url: 'https://api.meetup.com/2/groups?member_id=' + memberId + '&access_token=' + accessToken
 		})
 		.then(function(data) {
-			return data.results.sort(MeetupRaffler.sorter('name', false, function(a){return a.toUpperCase()}));
+			return data.results;
 		});
 	}
+});
+
+App.MeetupsIndexController = Ember.ArrayController.extend({
+	sortProperties: ['name']
 });
