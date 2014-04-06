@@ -73,9 +73,14 @@ Ember.Application.initializer({
 			}.property('accountId')
 		});
 		// register the meetup authenticator so the session can find it
-		container.register('authenticators:meetup', App.MeetupAuthenticator);
+		container.register('authenticators:meetup', App.MeetupAuthenticator, {
+			//https://api.meetup.com
+		});
 		//container.register('location:hash-from-url', App.HashLocationFromUrl);
-		Ember.SimpleAuth.setup(container, application);
+		Ember.SimpleAuth.setup(container, application, {
+			crossOriginWhitelist: ['https://api.meetup.com', 'http://localhost:8002'],
+			authorizer: App.MeetupAuthorizer
+		});
 	}
 });
 
@@ -125,8 +130,20 @@ App.MeetupAuthenticator = Ember.SimpleAuth.Authenticators.OAuth2.extend({
 				reject(credentials.error);
 		 	}
  		});
+	},
+	makeRequest: function() {
+		var memberId = '69467752';
+		//var accessToken = this.session.get('access_token');
+	  // 	return Ember.$.getJSON('https://api.meetup.com/2/groups?member_id=' + memberId + '&access_token=' + accessToken)
+			// .then(function(data) {
+			// 	console.log(data);
+			// });
+		var url = 'https://api.meetup.com/2/groups?member_id=' + memberId;
+		return Ember.$.getJSON(url).then(success); //, failure)
 	}
 });
+
+App.MeetupAuthorizer = Ember.SimpleAuth.Authorizers.OAuth2.extend();
 
 // use the provided mixins in the application route and login controller
 App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin, {
@@ -144,3 +161,11 @@ App.authenticationRoute = Ember.Route.extend({
 		controller.set('errorMessage', null);
 	}
 });
+
+// App.Store = DS.Store.extend({
+// 	revision: 13,
+// 	adapter: DS.RESTAdapter.create({
+// 		url: 'http://clara.eagle/v1/money',
+// 		corsWithCredentials: true
+// 	})
+// });
