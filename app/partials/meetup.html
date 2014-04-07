@@ -12,6 +12,7 @@
     <div style="clear: both;">
       <h4>(<span class="count">{{yes_rsvp_count}}</span> {{group.who}})</h4>
     </div>
+    <ul>
     {{#each rsvps}}
       <li class="thumbnail member-listing member-{{unbound _view.contentIndex}}">
         <div class="member-photo">
@@ -30,5 +31,6 @@
         </div>
       </li>
     {{/each}}
+    </ul>
   </div>
 </script>
