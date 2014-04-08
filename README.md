@@ -1,3 +1,10 @@
+MeetupRaffler-Ember
+===================
+
+MeetupRaffler demo app written in Ember
+
+**Not a real app** - For playing with Ember only.
+
 starter-kit
 ===========
 
