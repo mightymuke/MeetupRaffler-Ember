@@ -3,31 +3,28 @@
 </script>
 
 <script type="text/x-handlebars" id="meetups/index">
-  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-    <h1 class="page-header">Your Meetups</h1>
-    <ul class="meetups">
-      {{#each}}
-        <li class="thumbnail meetup-listing">
-          <div class="meetup-photo">
-            {{#if group_photo.thumb_link}}
-              <img src="{{unbound group_photo.thumb_link}}" />
-            {{else}}
-              <img src="http://photos4.meetupstatic.com/img/noPhoto_80.png" />
-            {{/if}}
-          </div>
-          <div class="meetup-details">
-            {{#link-to 'meetup' id class="thumb"}}
-              <div class="nametag-photo-name">
-                <h3 class="meetup-name">{{name}}</h3>
-              </div>
-            {{/link-to}}
-            <div>
-              <h4><span class="count">{{members}}</span> {{who}}</h4>
+  <h1 class="page-header">Your Meetups</h1>
+  <ul class="meetups">
+    {{#each}}
+      <li class="thumbnail meetup-listing">
+        <div class="meetup-photo">
+          {{#if group_photo.thumb_link}}
+            <img src="{{unbound group_photo.thumb_link}}" />
+          {{else}}
+            <img src="http://photos4.meetupstatic.com/img/noPhoto_80.png" />
+          {{/if}}
+        </div>
+        <div class="meetup-details">
+          {{#link-to 'meetup' id class="thumb"}}
+            <div class="nametag-photo-name">
+              <h3 class="meetup-name">{{name}}</h3>
             </div>
+          {{/link-to}}
+          <div>
+            <h4><span class="count">{{members}}</span> {{who}}</h4>
           </div>
-        </li>
-      {{/each}}
-    </ul>
-  </div>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
 </script>
-  
