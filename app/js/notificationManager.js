@@ -1,5 +1,3 @@
-// TODO should scope this to Angular instead of polluting global namespace
-
 /*
 
  This class maintains a list of notifications on the scope, and cleans up notifications

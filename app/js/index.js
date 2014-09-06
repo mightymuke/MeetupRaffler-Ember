@@ -1,10 +1,10 @@
-App.IndexRoute = Ember.Route.extend({
+MeetupRaffler.IndexRoute = Ember.Route.extend({
 	model: function() {
 		return { title: "Dashboard" };
 	}
 });
 
-App.IndexController = Ember.ObjectController.extend({
+MeetupRaffler.IndexController = Ember.ObjectController.extend({
 	isEditing: false,
 
 	actions: {

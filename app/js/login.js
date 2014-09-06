@@ -1,9 +1,4 @@
-App.LoginRoute = Ember.Route.extend({
-	afterModel: function() {
-		if (this.session.get('isAuthenticated')) {
-			this.transitionTo('meetups');
-		}
-	},
+MeetupRaffler.LoginRoute = Ember.Route.extend({
 	model: function(params) {
 		var getAuthDataFromPath = function(path) {
 			var hash = '';
@@ -27,6 +22,6 @@ App.LoginRoute = Ember.Route.extend({
 		}
 
 		var authData = getAuthDataFromPath(params.oauth2Credentials);
-		this.get('session').authenticate('authenticators:meetup', getAuthStuff(authData));
+		this.get('session').authenticate(EmberENV['simple-auth'].authenticator, getAuthStuff(authData));
 	}
 });

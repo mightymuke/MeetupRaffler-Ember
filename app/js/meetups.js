@@ -1,25 +1,17 @@
-// App.MeetupsIndexRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
-// 	model: function() {
-// 		return dataMeetups.results.sort(MeetupRaffler.sorter('name', false, function(a){return a.toUpperCase()}));
-// 	}
-// })
-
-App.MeetupsIndexRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
+MeetupRaffler.MeetupsIndexRoute = Ember.Route.extend(SimpleAuth.AuthenticatedRouteMixin, {
 	model: function() {
-		//this.get('session').makeRequest('authenticators:meetup', {});
-		var memberId = '69467752';
-		var accessToken = this.session.get('access_token');
-		return Ember.$.ajax({
-			type: "GET",
-			dataType: 'jsonp',
-			url: 'https://api.meetup.com/2/groups?member_id=' + memberId + '&access_token=' + accessToken
-		})
-		.then(function(data) {
-			return data.results;
-		});
+		var url = 'https://api.meetup.com/2/groups?member_id=' + EmberENV.AppConfig.userMeetupId;
+		if (!EmberENV.AppConfig.useMeetupWebServices) {
+			url = '/app/data/meetups.json';
+		}
+		return Ember.$
+			.getJSON(url)
+			.then(function(data) {
+				return data.results.sort(EmberENV.AppConfig.sorter('name', false, function(a) { return a.toUpperCase(); }));
+			});
 	}
 });
 
-App.MeetupsIndexController = Ember.ArrayController.extend({
-	sortProperties: ['name']
-});
+// MeetupRaffler.MeetupsIndexController = Ember.ArrayController.extend({
+// 	sortProperties: ['name']
+// });
