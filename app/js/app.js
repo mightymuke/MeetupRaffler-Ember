@@ -162,17 +162,24 @@ MeetupRaffler.MeetupAuthorizer = SimpleAuth.Authorizers.OAuth2.extend({
 		var isSecureUrl = function(url) {
 			var link  = document.createElement('a');
 			link.href = url;
-			link.href = link.href;
 			return link.protocol == 'https:';
 		};
 
+		var isLocal = function(url) {
+			var link  = document.createElement('a');
+			link.href = url;
+			return link.href.lastIndexOf(location.origin, 0) == 0;
+		}
+
 		var accessToken = this.get('session.access_token');
 
-		if (this.get('session.isAuthenticated') && !Ember.isEmpty(accessToken) && EmberENV.AppConfig.useMeetupWebServices) {
-			if (!isSecureUrl(requestOptions.url)) {
-				Ember.Logger.warn('Credentials are transmitted via an insecure connection - use HTTPS to keep them secure.');
+		if (this.get('session.isAuthenticated') && !Ember.isEmpty(accessToken)) {
+			if (!isLocal(requestOptions.url)) {
+				if (!isSecureUrl(requestOptions.url)) {
+					Ember.Logger.warn('Credentials are transmitted via an insecure connection - use HTTPS to keep them secure.');
+				}
+				requestOptions.url += "&access_token=" + accessToken;
 			}
-			requestOptions.url += "&access_token=" + accessToken;
 		}
 	}
 });
