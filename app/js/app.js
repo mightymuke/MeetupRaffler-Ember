@@ -1,4 +1,4 @@
-window.EmberENV = {
+window.EmberENV = $.extend(window.EmberENV, {
 
 	ENABLE_ALL_FEATURES: true,
 
@@ -9,73 +9,46 @@ window.EmberENV = {
 		crossOriginWhitelist: ['https://api.meetup.com']
 	},
 
-	AppConfig: {
-
-		useMeetupWebServices: false,     // If false will used cached data files
-
-		userMeetupId: 69467752,          // Users meetup ID
-
-		htmlTemplates: [
-			'partials/index.html',
-			'partials/meetups.html',
-			'partials/meetup.html'
-		],
-
-		initialize: function() {
-			// Load up all the HTML templates
-			$.each(this.htmlTemplates, function() {
-				$.ajax({
-					async: false,
-					type: 'GET',
-					url: this,
-					success: function(resp) {
-						$('body').append(resp);
-					}
-				});
-			});
-		},
+	/**
+	 * Sorts an array
+	 * @param {Array} field (to be sorted)
+	 * @param {Boolean} reverse
+	 *        - set to true for reverse order
+	 * @param {function}
+	 *        - parseInt for numbers
+	 *        - function(a){return a.toUpperCase()} for case insensitive search
+	 */
+	sorter: function(field, reverse, primer){
 
 		/**
-		 * Sorts an array
-		 * @param {Array} field (to be sorted)
-		 * @param {Boolean} reverse
-		 *        - set to true for reverse order
-		 * @param {function}
-		 *        - parseInt for numbers
-		 *        - function(a){return a.toUpperCase()} for case insensitive search
+		 * Retrieve nested item from object/array
+		 * @param {Object|Array} obj
+		 * @param {String} path dot separated
+		 * @param {*} def default value (if result undefined)
+		 * @returns {*}
 		 */
-		sorter: function(field, reverse, primer){
+		var getItem = function(obj, path, def){
 
-			/**
-			 * Retrieve nested item from object/array
-			 * @param {Object|Array} obj
-			 * @param {String} path dot separated
-			 * @param {*} def default value (if result undefined)
-			 * @returns {*}
-			 */
-			var getItem = function(obj, path, def){
-
-				for(var i = 0,path = path.split('.'),len = path.length; i < len; i++){
-					if(!obj || typeof obj !== 'object') return def;
-					obj = obj[path[i]];
-				}
-
-				if(obj === undefined) return def;
-				return obj;
+			for(var i = 0,path = path.split('.'),len = path.length; i < len; i++){
+				if(!obj || typeof obj !== 'object') return def;
+				obj = obj[path[i]];
 			}
 
-			var key = primer ?
-				function(x) {return primer(getItem(x, field));} :
-				function(x) {return getItem(x, field);};
+			if(obj === undefined) return def;
+			return obj;
+		}
 
-			reverse = [-1, 1][+!reverse];
+		var key = primer ?
+			function(x) {return primer(getItem(x, field));} :
+			function(x) {return getItem(x, field);};
 
-			return function (a, b) {
-				return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
-			}
+		reverse = [-1, 1][+!reverse];
+
+		return function (a, b) {
+			return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
 		}
 	}
-};
+});
 
 EmberENV.AppConfig.initialize();
 window.ENV = window.ENV || EmberENV;

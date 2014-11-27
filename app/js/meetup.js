@@ -20,7 +20,7 @@ MeetupRaffler.MeetupRoute = Ember.Route.extend(SimpleAuth.AuthenticatedRouteMixi
 			})
 			.then(function(rsvpData) {
 				var rsvps = MeetupRaffler.Helpers.explodeTheGuests(rsvpData.results);
-				model.rsvps = rsvps.sort(EmberENV.AppConfig.sorter('member.name', false, function(a) { return a.toUpperCase(); }));
+				model.rsvps = rsvps.sort(EmberENV.sorter('member.name', false, function(a) { return a.toUpperCase(); }));
 				var winnersUrl = '/app/data/winners.json';
 				return Ember.$.getJSON(winnersUrl);
 			})
